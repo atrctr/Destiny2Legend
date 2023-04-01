@@ -1,6 +1,5 @@
-import { getMembershipDataById } from "bungie-api-ts/user";
-import { getGroupsForMember, GroupType, GroupsForMemberFilter } from "bungie-api-ts/groupv2";
 import { getProfile, DestinyComponentType } from "bungie-api-ts/destiny2";
+import { getMembershipDataForCurrentUser } from "bungie-api-ts/user";
 import { HttpClientConfig } from "bungie-api-ts/http";
 
 const { BUNGIE_API_KEY } = process.env
@@ -35,12 +34,21 @@ const bungieAuthedFetch = (accessToken?: string) => async (
     }
   };
 
-  export const getDestinyMemberships = async (
-  bungieMembershipId: string,
+export const getDestinyMemberships = async (
   accessToken: string
 ) => {
-  return getMembershipDataById(bungieAuthedFetch(accessToken), {
-    membershipId: bungieMembershipId,
-    membershipType: 254
-  });
+  return getMembershipDataForCurrentUser(bungieAuthedFetch(accessToken));
 }
+
+export const getDestinyProfile = async (
+  membershipType: number,
+  destinyMembershipId: string
+) => {
+  return getProfile(bungieAuthedFetch(), {
+    membershipType: membershipType,
+    destinyMembershipId: destinyMembershipId,
+    components: [DestinyComponentType.Characters, DestinyComponentType.Profiles]
+  });
+};
+
+
