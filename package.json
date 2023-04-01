@@ -2,6 +2,7 @@
   "name": "d2-legend",
   "version": "1.0.0",
   "main": "dist/app.js",
+  "type": "module",
   "dependencies": {
     "bungie-api-ts": "^4.22.2",
     "dotenv": "^16.0.3",
@@ -18,7 +19,7 @@
     "typescript": "^5.0.3"
   },
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "start": "nodemon",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist"

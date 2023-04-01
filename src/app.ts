@@ -1,10 +1,13 @@
 import express from 'express'
-import { getDestinyMemberships as bungieGetDestinyMemberships, getDestinyProfile } from './bungie';
+import { getDestinyMemberships as bungieGetDestinyMemberships, getDestinyProfile } from './bungie.js';
 import { GroupUserInfoCard } from 'bungie-api-ts/groupv2';
 
-require("dotenv").config()
-const https = require('https')
-const fs = require('fs')
+import dotenv from 'dotenv'
+dotenv.config()
+
+import https from 'https'
+import fs from 'fs'
+
 const app = express()
 const port = 3000
 
