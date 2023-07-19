@@ -1,7 +1,7 @@
 {
   "name": "d2-legend",
   "version": "1.0.0",
-  "main": "dist/app.js",
+  "main": "dist/index.js",
   "type": "module",
   "dependencies": {
     "bungie-api-ts": "^4.22.2",

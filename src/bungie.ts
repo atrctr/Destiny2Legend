@@ -1,8 +1,10 @@
 import { getProfile, DestinyComponentType } from "bungie-api-ts/destiny2";
-import { getMembershipDataForCurrentUser } from "bungie-api-ts/user";
+import { getMembershipDataById, GetMembershipDataByIdParams} from "bungie-api-ts/user";
 import { HttpClientConfig } from "bungie-api-ts/http";
+import dotenv from 'dotenv'
+dotenv.config()
 
-const { BUNGIE_API_KEY } = process.env
+const BUNGIE_API_KEY  = process.env.BUNGIE_API_KEY
 
 const bungieAuthedFetch = (accessToken?: string) => async (
     config: HttpClientConfig
@@ -26,7 +28,9 @@ const bungieAuthedFetch = (accessToken?: string) => async (
           : ""
       }`;
       console.log(`Fetching: ${url}`);
+      console.log(`API key: ${BUNGIE_API_KEY}` )
       const response = await fetch(url, { headers, credentials: "include" });
+      console.log(response.status + ' ' + response.statusText);
       return await response.json();
     } catch (e) {
       console.error(e);
@@ -35,20 +39,28 @@ const bungieAuthedFetch = (accessToken?: string) => async (
   };
 
 export const getDestinyMemberships = async (
-  accessToken: string
+  accessToken: string,
+  membershipId: string,
 ) => {
-  return getMembershipDataForCurrentUser(bungieAuthedFetch(accessToken));
+  return getMembershipDataById(
+    bungieAuthedFetch(accessToken), {
+      membershipId : membershipId,
+      membershipType : 254
+    })
+
 }
 
 export const getDestinyProfile = async (
+  //accessToken: string,
   membershipType: number,
   destinyMembershipId: string
 ) => {
-  return getProfile(bungieAuthedFetch(), {
+  let response = await getProfile(bungieAuthedFetch(), {
     membershipType: membershipType,
     destinyMembershipId: destinyMembershipId,
     components: [DestinyComponentType.Characters, DestinyComponentType.Profiles]
-  });
+  })
+  console.log('Bungie.net response status: ' + response.ErrorStatus)
+
+  return response
 };
-
-
