@@ -1,5 +1,5 @@
 import { getProfile, DestinyComponentType } from "bungie-api-ts/destiny2";
-import { getMembershipDataById, GetMembershipDataByIdParams} from "bungie-api-ts/user";
+import { getMembershipDataById } from "bungie-api-ts/user";
 import { HttpClientConfig } from "bungie-api-ts/http";
 import dotenv from 'dotenv'
 dotenv.config()
@@ -64,3 +64,27 @@ export const getDestinyProfile = async (
 
   return response
 };
+
+export const destinyPrimaryMembershipLookup = async ( 
+  destinyMembershipId: string
+) => {
+  let response = await getMembershipDataById(bungieAuthedFetch(), {
+    membershipId: destinyMembershipId,
+    membershipType: -1
+  })
+  console.log('Bungie.net response status: ' + response.ErrorStatus)
+  let primaryMembership = {membershipId: "", membershipType : 0, iconPath : ""}
+  if ( response.Response.primaryMembershipId != undefined ) {
+    primaryMembership.membershipId = response.Response.primaryMembershipId
+  } else {
+    primaryMembership.membershipId = destinyMembershipId
+  }
+  console.log('Bungie.net user ID: ' + response.Response.bungieNetUser.membershipId + '\nPrimary membership: ' + primaryMembership.membershipId)
+  primaryMembership.membershipType = response.Response.destinyMemberships.filter(membership => membership.membershipId === primaryMembership.membershipId)[0].membershipType
+  primaryMembership.iconPath = response.Response.destinyMemberships.filter(membership => membership.membershipId === primaryMembership.membershipId)[0].iconPath
+  //console.log(primaryMembership)
+  console.log('Membership type: ' + primaryMembership.membershipType )
+
+  return primaryMembership
+
+}
