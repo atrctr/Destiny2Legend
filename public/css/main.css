@@ -1,8 +1,44 @@
-body {
-    font-family: 'Helvetica Neue', Helvetica, Roboto, Univers, Arial, sans-serif;
-    size: 16px;
+:root {
+    --accent-color: #479ce4
 }
 
-pre { word-wrap: normal; background: #eee; padding:0.25rem; }
+
+
+body {
+    font-family: neue-haas-grotesk-display, "Neue Haas Grotesk Display", 'Helvetica Neue', Helvetica, Roboto, Univers, Arial, sans-serif;
+    size: 16px;
+    color: #eee;
+    background-color: #383838;
+    padding: 0; margin: 0;
+}
+
+h1 { text-align: center;}
+
+a { color: var(--accent-color);}
+
+#main-navbar {
+    background: rgba(0,0,0,0.5);
+    padding: 1rem; margin: 0
+}
+
+#main-content {
+    width: 50rem;
+    margin: auto;
+}
+
+pre { background: #242424; padding:0.5rem;
+    word-wrap: normal;
+    tab-size:4; }
+pre.json-dump { 
+    max-height: 30rem; overflow:scroll }
 
 .dimmed { opacity: 0.5;}
+
+img.platform-icon {
+    height: 0.8em;
+    vertical-align:baseline;
+    /* background-color: #000; */
+    border-radius: 50%;
+    padding: 1px;
+    /* box-shadow: 0 0 2px #000 ; */
+}
