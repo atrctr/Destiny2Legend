@@ -5,7 +5,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 import https from 'https'
 import fs from 'fs'
-import { playerProfile } from './playerprofile.js'
+import playerProfile from './playerprofile.js'
+import characters from './characters.js';
 
 const app = express()
 const port = 3000
@@ -47,12 +48,10 @@ app.get('/', (req, res) => {
 
       getDestinyProfile(membership.membershipType, membership.membershipId)
         .then((response) => {
-          const characterData = response.Response.characters.data
 
           res.write( playerProfile( response ) )
+          res.write( characters ( response) )
          
-          res.write( "<p>Characters:</p>" + `<pre>${JSON.stringify(characterData,null,'\t')}</pre>`)
-
           wrapUp(res)
         })
 
