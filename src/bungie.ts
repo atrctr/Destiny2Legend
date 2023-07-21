@@ -6,7 +6,7 @@ dotenv.config()
 
 const BUNGIE_API_KEY  = process.env.BUNGIE_API_KEY
 
-const bungieAuthedFetch = (accessToken?: string) => async (
+export const bungieAuthedFetch = (accessToken?: string) => async (
     config: HttpClientConfig
   ) => {
     try {

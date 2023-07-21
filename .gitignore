@@ -1,3 +1,6 @@
+# Downloaded Destiny manifest files 
+resources/Destiny*.json
+
 # Generated /dist folder
 dist
 

@@ -46,14 +46,17 @@ app.get('/', (req, res) => {
    
       getDestinyProfile(membership.membershipType, membership.membershipId)
         .then((response) => {
-          let profileData = response.Response.profile.data
+          const profileData = response.Response.profile.data
+          const characterData = response.Response.characters.data
           let bungieName = profileData.userInfo.bungieGlobalDisplayName + '<span class="dimmed">#' + profileData.userInfo.bungieGlobalDisplayNameCode + '</span>'
           res.write(`<h1>${bungieName} <img class='platform-icon' src=${BUNGIE_NET_URL}${membership.iconPath} /></h1> \n`)
+          let lastActiveDate = new Date(profileData.dateLastPlayed)
+          res.write( "<p>Last active: " + lastActiveDate.toLocaleString() + "</p>")
+          res.write( `<p>Guardian rank - Current: ${profileData.currentGuardianRank} <span class="dimmed">&bull; Highest: ${profileData.lifetimeHighestGuardianRank} </span></p>`)
+          res.write( `<p>Seasons: <code>${profileData.seasonHashes}</code></p>` )
+          res.write( "<p>Characters:</p>" + `<pre>${JSON.stringify(characterData,null,'\t')}</pre>`)
 
-          res.write( "<p>Last active: " + profileData.dateLastPlayed + "</p>")
-          res.write( `Guardian rank: ${profileData.currentGuardianRank}`)
-
-          res.write('<p><strong>JSON dump:</strong></p>\n<pre class="json-dump">' + JSON.stringify(response,null,'\t') + '</pre>')
+          //res.write('<p><strong>JSON dump:</strong></p>\n<pre class="json-dump">' + JSON.stringify(response,null,'\t') + '</pre>')
           wrapUp(res)
         })
 

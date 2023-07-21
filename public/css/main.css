@@ -2,13 +2,11 @@
     --accent-color: #479ce4
 }
 
-
-
 body {
     font-family: neue-haas-grotesk-display, "Neue Haas Grotesk Display", 'Helvetica Neue', Helvetica, Roboto, Univers, Arial, sans-serif;
     size: 16px;
     color: #eee;
-    background-color: #383838;
+    background-color: #0d0d11;
     padding: 0; margin: 0;
 }
 
@@ -18,21 +16,24 @@ a { color: var(--accent-color);}
 
 #main-navbar {
     background: rgba(0,0,0,0.5);
-    padding: 1rem; margin: 0
+    padding: 1rem; margin: 0;
+    text-align:center;
 }
+
+#app-logo { text-transform: uppercase; font-weight: 700; text-decoration: none;}
 
 #main-content {
     width: 50rem;
     margin: auto;
 }
 
-pre { background: #242424; padding:0.5rem;
+pre { background: rgba(0,0,0,0.5); padding:0.5rem;
     word-wrap: normal;
-    tab-size:4; }
-pre.json-dump { 
-    max-height: 30rem; overflow:scroll }
+    tab-size:4; 
+    overflow:scroll }
 
 .dimmed { opacity: 0.5;}
+.dimmed:hover { opacity: 0.75 }
 
 img.platform-icon {
     height: 0.8em;
