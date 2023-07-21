@@ -18,30 +18,26 @@ export const playerProfile = ( apiResponse ) => {
     const triumphScoreActive = apiResponse.Response.metrics.data.metrics['3981543480'].objectiveProgress.progress
     const triumphScoreTotal = apiResponse.Response.metrics.data.metrics['3329916678'].objectiveProgress.progress
 
-    let output = `<div class='player-profile'>
+    let output = `
         
-        <div class='flex-container'>
-            <div class='flex-tile'>
+            <div class='grid-tile'>
                 <h1 class='player-bungiename'>${bungieName} </h1> 
+                <p>Playing on ${platformType}</p>
+                <p>Last active: ${lastActiveDate.toLocaleString()} </p>
             </div>
 
-            <div class='flex-tile'><h3>Eyes up, Guardian</h3>
-            Playing on ${platformType}
-            <p>Last active: ${lastActiveDate.toLocaleString()} </p>
-            </div>
-
-            <div class='flex-tile'><h3><img height=16px src='/images/icon_guardian_ranks.png'> Guardian rank</h3>
+            <div class='grid-tile'><h3><img height=16px src='/images/icon_guardian_ranks.png'> Guardian rank</h3>
             <p>Current: <span class='guardian-rank'>${profileData.currentGuardianRank}</span></p>
             <p class="dimmed">Highest:  <span class='guardian-rank'>${profileData.lifetimeHighestGuardianRank}</span> </p>
             </div>
 
-            <div class='flex-tile'><h3><img height=16px src='/images/icon_triumphslifetime.webp'> Triumph Score</h3>
+            <div class='grid-tile'><h3><img height=16px src='/images/icon_triumphslifetime.webp'> Triumph Score</h3>
             <p>Active: ${triumphScoreActive.toLocaleString()} </p>
             <p class="dimmed">Total: ${triumphScoreTotal.toLocaleString()} </p></div>
-        </div>`
+        `
         
         // ${ playerOwnership(profileData.versionsOwned,profileData.seasonHashes )}    
-        output +=`</div>`
+        
 
     return output
 }

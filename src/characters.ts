@@ -3,7 +3,7 @@ import { BUNGIE_NET_URL } from "./app.js"
 export const characters = ( apiResponse ) => {
     const characterData : Object = apiResponse.Response.characters.data
 
-    let output = "<div class='character-container flex-container'>"
+    let output=""
     let i = 1
 
     Object.entries(characterData).forEach(
@@ -16,7 +16,7 @@ export const characters = ( apiResponse ) => {
 
             console.log( `${characterDetails.membershipId} Character slot ${i}: ${characterId} - ${characterClass}, ${characterSpecies} ${characterGender}`)
 
-            output += `<div class='character-slot character-slot-${i}'>
+            output += `<div class='grid-tile character-slot character-slot-${i}'>
                 <div id='character-${characterId}' class='character-slot-header' style='background-color: ${emblemColor}; background-image: url(${emblemPath});'>
                     <h2 class='character-slot-title'> ${characterClass} <span class='character-lightlevel'>${characterDetails.light}</span>
                     <br/><small></small></h2>
@@ -33,7 +33,6 @@ export const characters = ( apiResponse ) => {
         }
     )
     
-    output += `</div>`
     return output
 }
 

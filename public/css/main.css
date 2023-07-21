@@ -18,6 +18,8 @@ body {
 
 h1 { font-size:3rem; }
 
+h3 { border-bottom: 2px solid var(--text-light) }
+
 a { color: var(--accent-color);}
 
 pre { background: var(--bg-darker); padding:0.5rem;
@@ -28,13 +30,16 @@ pre { background: var(--bg-darker); padding:0.5rem;
 .dimmed { opacity: 0.5;}
 .dimmed:hover { opacity: 0.75 }
 
-div.flex-container { 
-    display: flex;
-    justify-content: space-between;
+div.grid-container { 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    column-gap: 0.5rem;
     
 }
-div.flex-tile {
-    flex-grow: 1;
+div.grid-tile {
+    min-height: 150px;
+    margin-bottom: 1rem;
 }
 
 #main-navbar {
@@ -47,8 +52,7 @@ div.flex-tile {
 
 #main-content {
     width: fit-content;
-    max-width: 1200px;
-    margin: auto;
+    margin: 2rem auto;
 }
 
 img.platform-icon {

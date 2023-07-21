@@ -49,8 +49,12 @@ app.get('/', (req, res) => {
       getDestinyProfile(membership.membershipType, membership.membershipId)
         .then((response) => {
 
+          res.write(`<div class='grid-container'>`)
+
           res.write( playerProfile( response ) )
           res.write( characters ( response) )
+
+          res.write(`</div>`)
          
           wrapUp(res)
         })
