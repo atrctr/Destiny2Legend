@@ -1,11 +1,12 @@
 :root {
-    --bg-dark: #0d0d11;
+    --bg-dark: #14141a;
     --bg-darker: rgba(0,0,0,0.5);
     --bg-light: #eee;
     --text-light: var(--bg-light);
     --text-dark:var(--bg-dark);
-    --accent-color: rgb(71, 156, 228);
+    --accent-color: var(--bungie-blue);
     --secondary-color: rgb(255, 218, 136);
+    --bungie-blue: rgb(71, 156, 228);
 }
 
 body {
@@ -32,7 +33,7 @@ pre { background: var(--bg-darker); padding:0.5rem;
 
 div.grid-container { 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     column-gap: 0.5rem;
     
@@ -40,6 +41,11 @@ div.grid-container {
 div.grid-tile {
     min-height: 150px;
     margin-bottom: 1rem;
+    /* background: linear-gradient(-30deg, rgba(69,69,69,0) 28%, rgba(124, 124, 124, 0.158) 79%); */
+}
+.grid-placeholder {
+    border: 2px solid rgba(255, 255, 0, 0.5);
+    background-color: rgba(255, 255, 0, 0.1);
 }
 
 #main-navbar {
@@ -73,6 +79,10 @@ img.platform-icon {
     margin:1rem 0 0;
 }
 
+.text-bungie-blue {
+    color: var(--bungie-blue);
+}
+
 .guardian-rank {
     color:var(--text-dark);
     background-color: var(--bg-light);
@@ -94,7 +104,7 @@ img.platform-icon {
     max-width: 480px;
 }
 .character-slot-header {
-    height:76px;
+    height:82px;
     width: 400px;
     padding:0;
     background-repeat: no-repeat;
@@ -102,7 +112,7 @@ img.platform-icon {
     background-size:contain;
 }
 .character-slot-title {
-    margin:0 0 0 76px ;
+    margin:0 0 0 82px ;
     font-weight: 100;
     font-size:2rem;
     text-shadow: 1px 1px 2px var(--text-dark);
@@ -110,7 +120,7 @@ img.platform-icon {
 .character-lightlevel {
     float:right;
     color: var(--secondary-color);
-    margin: 0; padding:0.25rem;
+    margin: 0; padding-right:0.25rem;
 }
 
 ul.character-statistics {

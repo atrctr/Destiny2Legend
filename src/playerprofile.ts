@@ -4,7 +4,7 @@ import { BUNGIE_NET_URL } from "./app.js"
 export const playerProfile = ( apiResponse ) => {
     const profileData = apiResponse.Response.profile.data
 
-    const bungieName = profileData.userInfo.bungieGlobalDisplayName + '<span class="dimmed">#' + profileData.userInfo.bungieGlobalDisplayNameCode + '</span>'
+    const bungieName = profileData.userInfo.bungieGlobalDisplayName + '<span class="text-bungie-blue">#' + profileData.userInfo.bungieGlobalDisplayNameCode + '</span>'
     const membershipTypes: { [key: string] : string } = {
         1 : "Xbox",
         2 : "PlayStation",
@@ -27,18 +27,17 @@ export const playerProfile = ( apiResponse ) => {
             </div>
 
             <div class='grid-tile'><h3><img height=16px src='/images/icon_guardian_ranks.png'> Guardian rank</h3>
-            <p>Current: <span class='guardian-rank'>${profileData.currentGuardianRank}</span></p>
-            <p class="dimmed">Highest:  <span class='guardian-rank'>${profileData.lifetimeHighestGuardianRank}</span> </p>
+                <p>Current: <span class='guardian-rank'>${profileData.currentGuardianRank}</span></p>
+                <p class="dimmed">Highest:  <span class='guardian-rank'>${profileData.lifetimeHighestGuardianRank}</span> </p>
             </div>
 
             <div class='grid-tile'><h3><img height=16px src='/images/icon_triumphslifetime.webp'> Triumph Score</h3>
-            <p>Active: ${triumphScoreActive.toLocaleString()} </p>
-            <p class="dimmed">Total: ${triumphScoreTotal.toLocaleString()} </p></div>
-        `
+                <p>Active: ${triumphScoreActive.toLocaleString()} </p>
+                <p class="dimmed">Total: ${triumphScoreTotal.toLocaleString()} </p>
+            </div>`
         
         // ${ playerOwnership(profileData.versionsOwned,profileData.seasonHashes )}    
         
-
     return output
 }
 
