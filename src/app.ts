@@ -5,11 +5,12 @@ import dotenv from 'dotenv'
 dotenv.config()
 import https from 'https'
 import fs from 'fs'
+import { playerProfile } from './playerprofile.js'
 
 const app = express()
 const port = 3000
 
-const BUNGIE_NET_URL = "https://www.bungie.net"
+export const BUNGIE_NET_URL = "https://www.bungie.net"
 const BUNGIE_OAUTH_CLIENT_ID  = process.env.BUNGIE_OAUTH_CLIENT_ID;
 const BUNGIE_OAUTH_AUTHORIZE_URL = "https://www.bungie.net/en/OAuth/Authorize";
 const BUNGIE_OAUTH_TOKEN_URL = "https://www.bungie.net/platform/app/oauth/token/";
@@ -43,20 +44,15 @@ app.get('/', (req, res) => {
     destinyPrimaryMembershipLookup(bungieMembershipId)
     .then((response) => {
       const membership = response
-   
+
       getDestinyProfile(membership.membershipType, membership.membershipId)
         .then((response) => {
-          const profileData = response.Response.profile.data
           const characterData = response.Response.characters.data
-          let bungieName = profileData.userInfo.bungieGlobalDisplayName + '<span class="dimmed">#' + profileData.userInfo.bungieGlobalDisplayNameCode + '</span>'
-          res.write(`<h1>${bungieName} <img class='platform-icon' src=${BUNGIE_NET_URL}${membership.iconPath} /></h1> \n`)
-          let lastActiveDate = new Date(profileData.dateLastPlayed)
-          res.write( "<p>Last active: " + lastActiveDate.toLocaleString() + "</p>")
-          res.write( `<p>Guardian rank - Current: ${profileData.currentGuardianRank} <span class="dimmed">&bull; Highest: ${profileData.lifetimeHighestGuardianRank} </span></p>`)
-          res.write( `<p>Seasons: <code>${profileData.seasonHashes}</code></p>` )
+
+          res.write( playerProfile( response ) )
+         
           res.write( "<p>Characters:</p>" + `<pre>${JSON.stringify(characterData,null,'\t')}</pre>`)
 
-          //res.write('<p><strong>JSON dump:</strong></p>\n<pre class="json-dump">' + JSON.stringify(response,null,'\t') + '</pre>')
           wrapUp(res)
         })
 

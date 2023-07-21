@@ -58,7 +58,7 @@ export const getDestinyProfile = async (
   let response = await getProfile(bungieAuthedFetch(), {
     membershipType: membershipType,
     destinyMembershipId: destinyMembershipId,
-    components: [DestinyComponentType.Characters, DestinyComponentType.Profiles]
+    components: [DestinyComponentType.Characters, DestinyComponentType.Profiles, DestinyComponentType.Metrics, DestinyComponentType.Records, DestinyComponentType.ProfileProgression]
   })
   console.log('Bungie.net response status: ' + response.ErrorStatus)
 
