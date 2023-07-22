@@ -39,31 +39,31 @@ function wrapUp(res) {
 app.get('/', (req, res) => {
   const html = fs.readFileSync('src/index.html')
   res.write(html)
-  const bungieMembershipId = req.query.id
+  const bungieMembershipId = sanitiseMembershipId(req.query.id)
   if( bungieMembershipId ) {
 
     destinyPrimaryMembershipLookup(bungieMembershipId)
     .then((response) => {
       const membership = response
 
-      getDestinyProfile(membership.membershipType, membership.membershipId)
-        .then((response) => {
-
-          res.write(`<div class='grid-container'>`)
-
-          res.write( playerProfile( response ) )
-          res.write( characters ( response) )
-
-          res.write ( placeholder(`All owned Title seals`) )
-          res.write ( placeholder(`Curated stat trackers`) )
-          res.write ( placeholder(`Content ownership history `) )
-
-          res.write(`</div>`)
-         
-          wrapUp(res)
-        })
-
-      })
+      if ( response != undefined ) {
+        getDestinyProfile(membership.membershipType, membership.membershipId)
+          .then((response) => {
+            res.write(`<div class='grid-container'>`)
+            res.write( playerProfile( response ) )
+            res.write( characters ( response) )
+            res.write ( placeholder(`All owned Title seals`) )
+            res.write ( placeholder(`Curated stat trackers`) )
+            res.write ( placeholder(`Content ownership history `) )
+            res.write(`</div>`)
+          
+            wrapUp(res)
+          })
+      } else {
+        console.log(`Profile not found, response undefined`)
+        wrapUp(res)
+      }
+    })
 
   } else {
     res.write(`<a href='/register-start' class='button'><span class="material-icons">login</span> Authorise with Bungie.net</a>\n`)
@@ -107,25 +107,6 @@ const getToken = async (authorizationCode: string) => {
   return tokenResponse.json() as Promise<TokenResponseData>;
 };
 
-const getDestinyMemberships = async (
-  bungieMembershipId: string,
-  accessToken: string
-) => {
-  const response = await bungieGetDestinyMemberships(
-    bungieMembershipId,
-    accessToken
-  );
-  if (
-    !response.Response ||
-    (response.ErrorStatus && response.ErrorStatus !== "Success")
-  ) {
-    throw Error(
-      `Unexpected error status while fetching membership data: ${response.ErrorStatus}`
-    );
-  }
-  return response.Response.destinyMemberships;
-};
-
 app.get("/register", async (req, res) => {
     const { code } = req.query
     if (code !== "undefined") {
@@ -154,6 +135,17 @@ app.get("/register", async (req, res) => {
 })
 
 export default app;
+
+function sanitiseMembershipId( input ) {
+  try{
+    let output = BigInt(input)
+    let output2 = output.toString()
+    console.log(`${input} > ${output} > ${output2}`)
+    return output2
+  } catch {
+    console.log(`ERR: ${input} is not a valid membership ID!`)
+  }
+}
 
 function placeholder ( tempText : string) {
   let output = `<div class='grid-tile grid-placeholder' style='grid-column: span 3; text-align: center' >
