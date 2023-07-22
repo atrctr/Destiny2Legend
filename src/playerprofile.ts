@@ -19,21 +19,22 @@ export const playerProfile = ( apiResponse ) => {
     const triumphScoreTotal = apiResponse.Response.metrics.data.metrics['3329916678'].objectiveProgress.progress
 
     let output = `
-        
             <div class='grid-tile'>
                 <h1 class='player-bungiename'>${bungieName} </h1> 
-                <p>Playing on ${platformType}</p>
-                <p>Last active: ${lastActiveDate.toLocaleString()} </p>
+                <p><span class="material-icons">sports_esports</span> Playing on ${platformType}</p>
+                <p><span class="material-icons">history</span> Last played: ${lastActiveDate.toLocaleString()} </p>
             </div>
 
             <div class='grid-tile'><h3><img height=16px src='/images/icon_guardian_ranks.png'> Guardian rank</h3>
-                <p>Current: <span class='guardian-rank'>${profileData.currentGuardianRank}</span></p>
-                <p class="dimmed">Highest:  <span class='guardian-rank'>${profileData.lifetimeHighestGuardianRank}</span> </p>
+                <p><span class="material-icons">today</span> Current rank: 
+                    <span class='guardian-rank'><span class='guardian-rank-roundel'>${profileData.currentGuardianRank}</span> <span class='dimmed'>${guardianRanks[profileData.currentGuardianRank]}</span></span> </p>
+                <p class="dimmed"><span class="material-icons">timeline</span> Highest achieved: 
+                    <span class='guardian-rank'><span class='guardian-rank-roundel'>${profileData.lifetimeHighestGuardianRank}</span> ${guardianRanks[profileData.lifetimeHighestGuardianRank]} </span></p>
             </div>
 
             <div class='grid-tile'><h3><img height=16px src='/images/icon_triumphslifetime.webp'> Triumph Score</h3>
-                <p>Active: ${triumphScoreActive.toLocaleString()} </p>
-                <p class="dimmed">Total: ${triumphScoreTotal.toLocaleString()} </p>
+                <p><img height=20px src='/images/icon_triumphslifetime.webp' /> Active Triumph score: ${triumphScoreActive.toLocaleString()} </p>
+                <p class="dimmed"><img height=20px src='/images/icon_triumphsmemorialized.webp' /> Total lifetime score: ${triumphScoreTotal.toLocaleString()} </p>
             </div>`
         
         // ${ playerOwnership(profileData.versionsOwned,profileData.seasonHashes )}    
@@ -54,3 +55,18 @@ export default playerProfile
 //     return prettyOutput
 
 // }
+
+const guardianRanks: { [key: string] : string } = {
+    0 : "not applicable",
+    1 : "New Light",
+    2 : "Explorer",
+    3 : "Initiate",
+    4 : "Scout",
+    5 : "Adventurer",
+    6 : "Veteran",
+    7 : "Elite",
+    8 : "Justiciar",
+    9 : "Vanquisher",
+    10 : "Exemplar",
+    11 : "Paragon"
+}
