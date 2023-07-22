@@ -20,14 +20,13 @@ export const characters = ( apiResponse ) => {
                 <div id='character-${characterId}' class='character-slot-header' style='background-color: ${emblemColor}; background-image: url(${emblemPath});'>
                     <h2 class='character-slot-title'> ${characterClass} <span class='character-lightlevel'>${characterDetails.light}</span></h2>
                 </div>
-                <div class='character-title'>Title hash: <code>${characterDetails.titleRecordHash}</code></div>
-
+                ${titleBanner(characterDetails.titleRecordHash)}
                 <ul class='character-statistics'>
                     <li><span class="material-icons">person</span> 
                     ${characterSpecies} ${characterGender}</li>
                     <li><span class="material-icons">hourglass_empty</span> 
                     Playtime: ${ playtimeCalculate(characterDetails.minutesPlayedTotal)} </li>
-                    <li> <span class="material-icons">history</span> 
+                    <li><span class="material-icons">history</span> 
                     Last played: ${new Date(characterDetails.dateLastPlayed).toLocaleString()} </li>
                 </ul>
             </div>`
@@ -74,4 +73,20 @@ function playtimeCalculate( minutes ) {
     result = result.slice(0,2)
     const resultString = result.join(', ')
     return resultString
+}
+
+const titleBanner = ( hash:String ) => {
+
+    if ( hash == undefined ) {
+        console.log('Title not equipped')
+        return ''
+    } else {
+
+        // TODO: programmatically match triumph hash to triumph string
+        
+        const bannerBlock = `<div class='character-title'>
+        Title hash: <code>${hash}</code>
+            </div>`  
+        return bannerBlock
+    }   
 }
