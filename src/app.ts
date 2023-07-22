@@ -49,24 +49,25 @@ app.get('/', (req, res) => {
       if ( response != undefined ) {
         getDestinyProfile(membership.membershipType, membership.membershipId)
           .then((response) => {
-            res.write(`<div class='grid-container'>`)
-            res.write( playerProfile( response ) )
-            res.write( characters ( response) )
-            res.write ( placeholder(`All owned Title seals`) )
-            res.write ( placeholder(`Curated stat trackers`) )
-            res.write ( placeholder(`Content ownership history `) )
-            res.write(`</div>`)
-          
+            res.write(`<div class='grid-container'>
+              ${playerProfile( response )}
+              ${characters ( response)}
+            
+            </div>`)
             wrapUp(res)
           })
       } else {
         console.log(`Profile not found, response undefined`)
+        res.write(`<h1>Profile not found.</h1>`)
         wrapUp(res)
       }
     })
 
   } else {
-    res.write(`<a href='/register-start' class='button'><span class="material-icons">login</span> Authorise with Bungie.net</a>\n`)
+    res.write(`
+    <h1>Discover your own <span class='text-bungie-blue'>legend</span>.</h1>
+    <a href='/register-start' class='button'><span class="material-icons">login</span> Authorise with Bungie.net</a>
+    `)
     wrapUp(res)
   }
 
@@ -145,11 +146,4 @@ function sanitiseMembershipId( input ) {
   } catch {
     console.log(`ERR: ${input} is not a valid membership ID!`)
   }
-}
-
-function placeholder ( tempText : string) {
-  let output = `<div class='grid-tile grid-placeholder' style='grid-column: span 3; text-align: center' >
-    <h2>${tempText}</h2>
-  </div>`
-  return output
 }
