@@ -54,6 +54,10 @@ app.get('/', (req, res) => {
           res.write( playerProfile( response ) )
           res.write( characters ( response) )
 
+          res.write ( placeholder(`All owned Title seals`) )
+          res.write ( placeholder(`Curated stat trackers`) )
+          res.write ( placeholder(`Content ownership history `) )
+
           res.write(`</div>`)
          
           wrapUp(res)
@@ -62,7 +66,7 @@ app.get('/', (req, res) => {
       })
 
   } else {
-    res.write("<p><a href='/register-start'>Authorise with Bungie.net</a></p>\n")
+    res.write(`<a href='/register-start' class='button'><span class="material-icons">login</span> Authorise with Bungie.net</a>\n`)
     wrapUp(res)
   }
 
@@ -150,3 +154,10 @@ app.get("/register", async (req, res) => {
 })
 
 export default app;
+
+function placeholder ( tempText : string) {
+  let output = `<div class='grid-tile grid-placeholder' style='grid-column: span 3; text-align: center' >
+    <h2>${tempText}</h2>
+  </div>`
+  return output
+}

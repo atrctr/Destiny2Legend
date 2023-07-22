@@ -16,17 +16,19 @@ export const characters = ( apiResponse ) => {
 
             console.log( `${characterDetails.membershipId} Character slot ${i}: ${characterId} - ${characterClass}, ${characterSpecies} ${characterGender}`)
 
-            output += `<div class='grid-tile character-slot character-slot-${i}'>
+            output += `<div class='grid-tile character-slot character-slot-${i} character-${characterClass.toLowerCase()}'>
                 <div id='character-${characterId}' class='character-slot-header' style='background-color: ${emblemColor}; background-image: url(${emblemPath});'>
-                    <h2 class='character-slot-title'> ${characterClass} <span class='character-lightlevel'>${characterDetails.light}</span>
-                    <br/><small></small></h2>
+                    <h2 class='character-slot-title'> ${characterClass} <span class='character-lightlevel'>${characterDetails.light}</span></h2>
                 </div>
+                <div class='character-title'>Title hash: <code>${characterDetails.titleRecordHash}</code></div>
 
                 <ul class='character-statistics'>
-                    <li>Title hash: <code>${characterDetails.titleRecordHash}</code></li>
-                    <li>${characterSpecies} ${characterGender}</li>
-                    <li>Playtime: ${ playtimeCalculate(characterDetails.minutesPlayedTotal)} </li>
-                    <li>Last played: ${new Date(characterDetails.dateLastPlayed).toLocaleString()} </li>
+                    <li><span class="material-icons">person</span> 
+                    ${characterSpecies} ${characterGender}</li>
+                    <li><span class="material-icons">hourglass_empty</span> 
+                    Playtime: ${ playtimeCalculate(characterDetails.minutesPlayedTotal)} </li>
+                    <li> <span class="material-icons">history</span> 
+                    Last played: ${new Date(characterDetails.dateLastPlayed).toLocaleString()} </li>
                 </ul>
             </div>`
             i++
