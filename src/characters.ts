@@ -19,8 +19,10 @@ export const characters = ( apiResponse ) => {
             console.log( `${characterDetails.membershipId} Character slot ${i}: ${characterId} - ${characterClass}, ${characterSpecies} ${characterGender}`)
 
             output += `<div class='grid-tile character-slot character-slot-${i} character-${characterClass.toLowerCase()}'>
-                <div id='character-${characterId}' class='character-slot-header' style='background-color: ${emblemColor}; background-image: url(${emblemPath});'>
-                    <h2 class='character-slot-title'> ${characterClass} <span class='character-lightlevel'>${characterDetails.light}</span></h2>
+                <div id='character-${characterId}' class='character-emblem' style='background-color: ${emblemColor}; background-image: url(${emblemPath});'>
+                    <h2 class='character-emblem-text'> ${characterClass}
+                    <span class='character-emblem-lightlevel'><span class='destiny-symbols destiny-power-symbol'></span>${characterDetails.light}</span>
+                    </h2>
                 </div>
                 ${titleBanner(characterDetails.titleRecordHash)}
                 <ul class='character-statistics'>

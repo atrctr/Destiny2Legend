@@ -33,8 +33,8 @@ export const playerProfile = ( apiResponse ) => {
             </div>
 
             <div class='grid-tile'><h3><img height=16px src='/images/icon_triumphslifetime.webp'> Triumph Score</h3>
-                <p><img height=20px src='/images/icon_triumphslifetime.webp' /> Active Triumph score: ${triumphScoreActive.toLocaleString()} </p>
-                <p class="dimmed"><img height=20px src='/images/icon_triumphsmemorialized.webp' /> Total lifetime score: ${triumphScoreTotal.toLocaleString()} </p>
+                <p><img height=20px src='/images/icon_triumphslifetime.webp' class='icon' /> Active Triumph score: ${triumphScoreActive.toLocaleString()} </p>
+                <p class="dimmed"><img height=20px src='/images/icon_triumphsmemorialized.webp' class='icon' /> Total lifetime score: ${triumphScoreTotal.toLocaleString()} </p>
             </div>`
         
         // ${ playerOwnership(profileData.versionsOwned,profileData.seasonHashes )}    
