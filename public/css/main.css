@@ -11,7 +11,7 @@
 
 body {
     font-family: neue-haas-grotesk-display, "Neue Haas Grotesk Display", 'Helvetica Neue', Helvetica, Roboto, Univers, Arial, sans-serif;
-    size: 16px;
+    font-size: 16px;
     color: var(--text-light);
     background-color: var(--bg-dark);
     padding: 0; margin: 0;

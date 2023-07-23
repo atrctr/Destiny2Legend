@@ -1,5 +1,7 @@
 # Downloaded Destiny manifest files 
 resources/Destiny*.json
+# Unused dev assets
+public/images/icon-class-*.png
 
 # Generated /dist folder
 dist
