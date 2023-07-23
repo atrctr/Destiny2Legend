@@ -1,6 +1,7 @@
 import { BUNGIE_NET_URL } from "./app.js"
 import fs from 'fs'
-import { titleLookup } from "./legend.js"
+import { metricCollections, titleLookup } from "./legend.js"
+import { metricsBlock } from "./metrics.js"
 
 export const characters = ( apiResponse ) => {
     const characterData : Object = apiResponse.Response.characters.data
@@ -18,6 +19,8 @@ export const characters = ( apiResponse ) => {
 
             console.log( `${characterDetails.membershipId} Character slot ${i}: ${characterId} - ${characterClass}, ${characterSpecies} ${characterGender}`)
 
+            const relevantMetrics = metricCollections.subclass[characterClass.toLowerCase()]
+
             output += `<div class='grid-tile character-slot character-slot-${i} character-${characterClass.toLowerCase()}'>
                 <div id='character-${characterId}' class='character-emblem' style='background-color: ${emblemColor}; background-image: url(${emblemPath});'>
                     <h2 class='character-emblem-text'> ${characterClass}
@@ -32,8 +35,13 @@ export const characters = ( apiResponse ) => {
                     Playtime: ${ playtimeCalculate(characterDetails.minutesPlayedTotal)} </li>
                     <li><span class="material-icons">history</span> 
                     Last played: ${new Date(characterDetails.dateLastPlayed).toLocaleString()} </li>
+
+                    <hr />
+
+                    ${metricsBlock(relevantMetrics,apiResponse)}
                 </ul>
             </div>`
+            
             i++
         }
     )

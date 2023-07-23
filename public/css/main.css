@@ -5,8 +5,9 @@
     --text-light: var(--bg-light);
     --text-dark:var(--bg-dark);
     --accent-color: var(--bungie-blue);
-    --secondary-color: rgb(255, 218, 136);
+    --secondary-color: var(--gold);
     --bungie-blue: rgb(71, 156, 228);
+    --gold: rgb(255, 218, 136);
 }
 
 body {
@@ -54,6 +55,9 @@ img.icon {
 }
 .text-bungie-blue {
     color: var(--bungie-blue);
+}
+.text-gold {
+    color: var(--gold);
 }
 .destiny-symbols {
     font-family: 'Destiny Keys';
