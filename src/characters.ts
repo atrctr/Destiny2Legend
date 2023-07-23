@@ -1,4 +1,6 @@
 import { BUNGIE_NET_URL } from "./app.js"
+import fs from 'fs'
+import { titleLookup } from "./legend.js"
 
 export const characters = ( apiResponse ) => {
     const characterData : Object = apiResponse.Response.characters.data
@@ -75,18 +77,13 @@ function playtimeCalculate( minutes ) {
     return resultString
 }
 
-const titleBanner = ( hash:String ) => {
-
+const titleBanner = ( hash ) => {
     if ( hash == undefined ) {
         console.log('Title not equipped')
         return ''
     } else {
-
-        // TODO: programmatically match triumph hash to triumph string
-        
-        const bannerBlock = `<div class='character-title'>
-        Title hash: <code>${hash}</code>
-            </div>`  
+        const titleMatch = titleLookup( hash, 'Male')
+        const bannerBlock = `<div class='character-title'> ${titleMatch} </div>`  
         return bannerBlock
     }   
 }
