@@ -49,8 +49,18 @@ pre { background: var(--bg-darker); padding:0.5rem;
 
 img.icon {
     vertical-align: middle;
-    height: 24px;
-    width: 24px;
+    height: 1.5em;
+    width: 1.5em;
+}
+.text-bungie-blue {
+    color: var(--bungie-blue);
+}
+.destiny-symbols {
+    font-family: 'Destiny Keys';
+}
+.destiny-power-symbol {
+    font-size: 70%;
+    vertical-align: top;
 }
 
 div.grid-container { 
@@ -64,6 +74,9 @@ div.grid-tile {
     min-height: 150px;
     margin-bottom: 1rem;
     /* background: linear-gradient(-30deg, rgba(69,69,69,0) 28%, rgba(124, 124, 124, 0.158) 79%); */
+}
+.grid-span-whole {
+    grid-column: span 3;
 }
 .grid-placeholder {
     border: 2px solid rgba(255, 196, 0, 0.5);
@@ -99,20 +112,9 @@ img.platform-icon {
 
 .player-bungiename {
     margin:1rem 0 0;
-    word-wrap: break-word
-    ;}
-
-.text-bungie-blue {
-    color: var(--bungie-blue);
+    word-wrap: break-word;
 }
 
-.destiny-symbols {
-    font-family: 'Destiny Keys';
-}
-.destiny-power-symbol {
-    font-size: 70%;
-    vertical-align: top;
-}
 
 .guardian-rank {
     float:right;

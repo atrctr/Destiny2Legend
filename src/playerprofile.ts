@@ -5,24 +5,20 @@ export const playerProfile = ( apiResponse ) => {
     const profileData = apiResponse.Response.profile.data
 
     const bungieName = profileData.userInfo.bungieGlobalDisplayName + '<span class="text-bungie-blue">#' + profileData.userInfo.bungieGlobalDisplayNameCode + '</span>'
-    const membershipTypes: { [key: string] : string } = {
-        1 : "Xbox",
-        2 : "PlayStation",
-        3 : "Steam",
-        6 : "Epic Games"
-    }
-    const platformType = membershipTypes[profileData.userInfo.membershipType]
 
-    const lastActiveDate = new Date(profileData.dateLastPlayed)
+    const responseTimestamp = new Date(apiResponse.Response.responseMintedTimestamp).toLocaleString()
+    const lastActiveDate = new Date(profileData.dateLastPlayed).toLocaleString()
 
     const triumphScoreActive = apiResponse.Response.metrics.data.metrics['3981543480'].objectiveProgress.progress
     const triumphScoreTotal = apiResponse.Response.metrics.data.metrics['3329916678'].objectiveProgress.progress
 
     let output = `
+            <div class='grid-span-whole'><h1 class='player-bungiename'>${bungieName}</h1></div>
+
             <div class='grid-tile'>
-                <h1 class='player-bungiename'>${bungieName} </h1> 
-                <p><span class="material-icons">sports_esports</span> Playing on ${platformType}</p>
-                <p><span class="material-icons">history</span> Last played: ${lastActiveDate.toLocaleString()} </p>
+                <p><span class="material-icons">sports_esports</span> Playing on ${platformIcons(profileData.userInfo.applicableMembershipTypes)}</p>
+                <p><span class="material-icons">history</span> Last played: ${lastActiveDate} </p>
+                <p><span class="material-icons">sync</span> Data retrieved: ${responseTimestamp} </p>
             </div>
 
             <div class='grid-tile'><h3>Guardian rank</h3>
@@ -69,4 +65,35 @@ const guardianRanks: { [key: string] : string } = {
     9 : "Vanquisher",
     10 : "Exemplar",
     11 : "Paragon"
+}
+
+const membershipTypes: { [key: string] : string } = {
+    1 : "Xbox",
+    2 : "PlayStation",
+    3 : "Steam",
+    6 : "Epic Games"
+}
+const platformIcons = ( input ) => {
+    const platformIconPaths: { [key: string] : string } = {
+        1 : "images/platforms/xbox.svg",
+        2 : "images/platforms/playstation.svg",
+        3 : "images/platforms/steam.svg",
+        6 : "images/platforms/epic-games.svg"
+    } 
+
+    let platformTypes = []
+
+    if (typeof input == 'string' || typeof input == 'number' ) {
+        platformTypes.push(input)
+    } else if ( typeof input == 'object' ) {
+        platformTypes = input
+    }
+
+    let platformIcon = []
+    platformTypes.forEach(platform => {
+        const platformImage = `<img src='${platformIconPaths[platform]}' class='icon' alt='${membershipTypes[platform]}' title='${membershipTypes[platform]}' />`
+        platformIcon.push(platformImage)
+    });
+
+    return platformIcon.join(' ')
 }
