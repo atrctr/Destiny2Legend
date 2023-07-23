@@ -76,6 +76,10 @@ img.icon {
     vertical-align: top;
 }
 
+.text-columns-3 {
+    columns: 3;
+}
+
 div.grid-container { 
     display: grid;
     grid-template-columns: repeat(3, 400px);
@@ -193,4 +197,8 @@ ul.character-statistics {
 .character-statistics li {
     margin: 0; padding:0.5rem;
     line-height: 24px;
+}
+
+.metric-complete .metric-value {
+    color: var(--gold);
 }

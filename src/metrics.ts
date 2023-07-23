@@ -6,24 +6,28 @@ export const metrics = (apiResponse) => {
         "Crucible" : metricCollections.pvp,
         "Gambit" : metricCollections.gambit,
         "Vanguard" : metricCollections.strikes
-
     }
     let output = ''
 
     Object.entries(metricsGroups).forEach(
         ([groupName,metrics]) => {
             output += `
-        <div class='grid-tile'>
+        <div class='grid-tile metrics-${groupName.toLowerCase()}'>
             <h3>${groupName}</h3>
-            ${metricsBlock( metrics ,apiResponse)}
+            ${metricsBlock( metrics, apiResponse)}
         </div>`
         }
     )
-    output = `<h2  class='grid-span-whole'>Metrics</h2>
-        ${output}`
+    output = `<h2 class='grid-span-whole'>Metrics</h2>
+        ${output}
+        <div class='grid-span-whole metrics-weapons'>
+            <h3>Weapon defeats</h3>
+            <div class='text-columns-3'>
+                ${metricsBlock(metricCollections.weapons, apiResponse)}
+            </div>
+        </div>`
 
     return output
-
 }
 
 export default metrics
@@ -39,13 +43,12 @@ export const metricsBlock = ( requestedMetrics , apiResponse ) => {
         const metricComplete = fetchedMetrics[metric].objectiveProgress.complete
 
         console.log(`${metricDefinition.name}: ${metricValue} ${metricComplete}`)
-        output += `<li class='metric'>${metricDefinition.name}: `
         if ( metricComplete == true ) { 
-            output += `<span class='text-gold metric-complete' > ${metricValue} </span>` 
+            output += `<li class='metric metric-complete'>`
         } else {
-            output += metricValue
+            output += `<li class='metric'>`
         }
-        output += `</li>\n`
+        output += `${metricDefinition.name}: <span class='metric-value'>${metricValue}</span></li>\n`
     });
 
     output = `<ul class='metrics-list character-statistics'>

@@ -19,7 +19,7 @@ export const characters = ( apiResponse ) => {
 
             console.log( `${characterDetails.membershipId} Character slot ${i}: ${characterId} - ${characterClass}, ${characterSpecies} ${characterGender}`)
 
-            const relevantMetrics = metricCollections.subclass[characterClass.toLowerCase()]
+            const classMetrics = metricCollections.subclass[characterClass.toLowerCase()]
 
             output += `<div class='grid-tile character-slot character-slot-${i} character-${characterClass.toLowerCase()}'>
                 <div id='character-${characterId}' class='character-emblem' style='background-color: ${emblemColor}; background-image: url(${emblemPath});'>
@@ -38,7 +38,7 @@ export const characters = ( apiResponse ) => {
 
                     <hr />
 
-                    ${metricsBlock(relevantMetrics,apiResponse)}
+                    ${metricsBlock(classMetrics,apiResponse)}
                 </ul>
             </div>`
             

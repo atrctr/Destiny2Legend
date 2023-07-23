@@ -58,14 +58,17 @@ export const metricCollections = {
         1200426430, // RL
         2707112071,  // LFR
     ],
-    pvp: [811894228, // kills
+    pvp: [
+        1250683514, //title gildings
+        811894228, // kills
         3626149776, // rank resets
-        902410069,  // IB rankups
+        //902410069,  // IB rankups
         1196938828, // IB gold medals
         1765255052, // Trials flawless tickets
-        2082314848, // Trials kills
+        //2082314848, // Trials kills
         ],
     gambit: [
+        2365336843, // title gildings
         3587221881, // wins
         3227312321, // invaders killed
         3740642975, // primevals killed
@@ -73,6 +76,7 @@ export const metricCollections = {
 
     ],
     strikes: [
+        3266682176, // title gildings
         793155718,  // total completions
         2326329668, // flawless completions
         41075005, // champions slain
