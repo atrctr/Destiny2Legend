@@ -2,7 +2,6 @@ import https from 'https'
 import fs from 'fs'
 import { getDestinyManifest } from 'bungie-api-ts/destiny2'
 import { bungieAuthedFetch } from './bungie.js'
-import { error } from 'console'
 
 const MANIFEST_PATH = 'resources'
 
@@ -13,8 +12,6 @@ getDestinyManifest( bungieAuthedFetch() )
     const allComponents = response.Response.jsonWorldComponentContentPaths.en
     
     const requiredComponentManifests = [
-        allComponents.DestinyClassDefinition,
-        allComponents.DestinyGenderDefinition,
         allComponents.DestinyMetricDefinition,
         allComponents.DestinyRecordDefinition,
         allComponents.DestinySeasonDefinition,
@@ -23,7 +20,7 @@ getDestinyManifest( bungieAuthedFetch() )
     requiredComponentManifests.forEach( componentManifest => {
         const jsonManifestUrl = "https://www.bungie.net" + componentManifest
         console.log(`JSON path (English): ${jsonManifestUrl}`)
-        const filename = jsonManifestUrl.substring(jsonManifestUrl.lastIndexOf('/')+1);
+        const filename = jsonManifestUrl.substring(jsonManifestUrl.lastIndexOf('/')+1,jsonManifestUrl.indexOf('-')) + '.json';
         fileDownloader(jsonManifestUrl, `${MANIFEST_PATH}/${filename}`)
     })
 

@@ -21,6 +21,7 @@
   "scripts": {
     "start": "nodemon",
     "lint": "eslint . --ext .ts",
+    "update-definitions": "ts-node src/manifest-fetch.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist"
   },
