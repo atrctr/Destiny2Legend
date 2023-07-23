@@ -1,6 +1,34 @@
-import { metricDefinitionLookup } from "./legend.js"
+import { metricCollections, metricDefinitionLookup } from "./legend.js"
 
-export const metricsBlock = ( requestedMetrics : Array<string>, apiResponse ) => {
+export const metrics = (apiResponse) => {
+
+    const metricsGroups = {
+        "Crucible" : metricCollections.pvp,
+        "Gambit" : metricCollections.gambit,
+        "Vanguard" : metricCollections.strikes
+
+    }
+    let output = ''
+
+    Object.entries(metricsGroups).forEach(
+        ([groupName,metrics]) => {
+            output += `
+        <div class='grid-tile'>
+            <h3>${groupName}</h3>
+            ${metricsBlock( metrics ,apiResponse)}
+        </div>`
+        }
+    )
+    output = `<h2  class='grid-span-whole'>Metrics</h2>
+        ${output}`
+
+    return output
+
+}
+
+export default metrics
+
+export const metricsBlock = ( requestedMetrics , apiResponse ) => {
     const fetchedMetrics = apiResponse.Response.metrics.data.metrics
     console.log(requestedMetrics)
     let output = ""

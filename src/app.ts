@@ -7,6 +7,7 @@ import https from 'https'
 import fs from 'fs'
 import playerProfile from './playerprofile.js'
 import characters from './characters.js';
+import metrics from './metrics.js';
 
 const app = express()
 const port = 3000
@@ -52,6 +53,7 @@ app.get('/', (req, res) => {
             res.write(`<div class='grid-container'>
               ${playerProfile( response )}
               ${characters ( response)}
+              ${metrics ( response )}
             
             </div>`)
             wrapUp(res)
