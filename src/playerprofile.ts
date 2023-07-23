@@ -25,14 +25,14 @@ export const playerProfile = ( apiResponse ) => {
                 <p><span class="material-icons">history</span> Last played: ${lastActiveDate.toLocaleString()} </p>
             </div>
 
-            <div class='grid-tile'><h3><img height=16px src='/images/icon_guardian_ranks.png'> Guardian rank</h3>
-                <p><span class="material-icons">today</span> Current rank: 
+            <div class='grid-tile'><h3>Guardian rank</h3>
+                <p><img height=16px src='/images/icon_guardian_ranks.png' class='icon'> Current rank: 
                     <span class='guardian-rank'><span class='guardian-rank-roundel'>${profileData.currentGuardianRank}</span> <span class='dimmed'>${guardianRanks[profileData.currentGuardianRank]}</span></span> </p>
                 <p class="dimmed"><span class="material-icons">timeline</span> Highest achieved: 
                     <span class='guardian-rank'><span class='guardian-rank-roundel'>${profileData.lifetimeHighestGuardianRank}</span> ${guardianRanks[profileData.lifetimeHighestGuardianRank]} </span></p>
             </div>
 
-            <div class='grid-tile'><h3><img height=16px src='/images/icon_triumphslifetime.webp'> Triumph Score</h3>
+            <div class='grid-tile'><h3>Triumph Score</h3>
                 <p><img height=20px src='/images/icon_triumphslifetime.webp' class='icon' /> Active Triumph score: ${triumphScoreActive.toLocaleString()} </p>
                 <p class="dimmed"><img height=20px src='/images/icon_triumphsmemorialized.webp' class='icon' /> Total lifetime score: ${triumphScoreTotal.toLocaleString()} </p>
             </div>`
