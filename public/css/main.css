@@ -11,7 +11,7 @@
 }
 
 body {
-    font-family: neue-haas-grotesk-display, "Neue Haas Grotesk Display", 'Helvetica Neue', Helvetica, Roboto, Univers, Arial, sans-serif;
+    font-family: Inter, neue-haas-grotesk-display, "Neue Haas Grotesk Display", 'Helvetica Neue', Helvetica, Roboto, Univers, Arial, sans-serif;
     font-size: 16px;
     color: var(--text-light);
     background-color: var(--bg-dark);
@@ -19,9 +19,13 @@ body {
 }
 
 h1 { font-size:3rem; }
-
-h3 { 
-    text-transform: uppercase; }
+h2 { margin: 0;
+    font-weight: 400;
+    font-size:2rem;
+}
+h3 { margin: 1rem 0;
+    text-transform: uppercase; 
+    line-height: 1.5rem;}
 
 a { color: var(--accent-color);}
 
@@ -44,8 +48,15 @@ pre { background: var(--bg-darker); padding:0.5rem;
     transition: all linear 100ms;
 }
 .button:hover {
-    border-width: 2px;
-    padding: calc(0.5rem - 1px);
+    background-color: var(--bungie-blue);
+    color: var(--text-dark);
+}
+
+.text-bungie-blue {
+    color: var(--bungie-blue);
+}
+.text-gold {
+    color: var(--gold);
 }
 
 img.icon {
@@ -53,11 +64,9 @@ img.icon {
     height: 1.5em;
     width: 1.5em;
 }
-.text-bungie-blue {
-    color: var(--bungie-blue);
-}
-.text-gold {
-    color: var(--gold);
+.material-icons {
+    font-size:24px;
+    vertical-align: middle;
 }
 .destiny-symbols {
     font-family: 'Destiny Keys';
@@ -119,7 +128,6 @@ img.platform-icon {
     word-wrap: break-word;
 }
 
-
 .guardian-rank {
     float:right;
     text-transform: uppercase;
@@ -129,8 +137,8 @@ img.platform-icon {
     color:var(--text-dark);
     background-color: var(--bg-light);
     border-radius: 50%;
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1.2em;
+    height: 1.2em;
     display: inline-block;
     text-align: center;
     font-weight: 600;
@@ -140,9 +148,8 @@ img.platform-icon {
     width:fit-content;
     margin:auto;
 }
-
 .character-slot {
-    max-width: 480px;
+    max-width: 400px;
     background-position: center;
 }
 .character-emblem {
@@ -156,8 +163,6 @@ img.platform-icon {
 .character-emblem-text {
     padding:0.5rem 0.5rem 0.5rem 82px ;
     margin: 0;
-    font-weight: 100;
-    font-size:2rem;
     text-shadow: 1px 1px 2px var(--text-dark);
 }
 .character-emblem-lightlevel {
@@ -188,8 +193,4 @@ ul.character-statistics {
 .character-statistics li {
     margin: 0; padding:0.5rem;
     line-height: 24px;
-}
-.material-icons {
-    font-size:24px;
-    vertical-align: middle;
 }
