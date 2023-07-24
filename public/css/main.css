@@ -106,7 +106,7 @@ div.grid-tile {
     text-align:center;
 }
 
-#app-logo { text-transform: uppercase; font-weight: 700; text-decoration: none;}
+#app-logo { color: var(--text-light); text-transform: uppercase; font-weight: 700; text-decoration: none;}
 
 #main-content {
     width: fit-content;

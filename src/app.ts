@@ -8,6 +8,7 @@ import fs from 'fs'
 import playerProfile from './playerprofile.js'
 import characters from './characters.js';
 import metrics from './metrics.js';
+import Navbar from './navbar.js';
 
 const app = express()
 const port = 3000
@@ -40,6 +41,7 @@ function wrapUp(res) {
 app.get('/', (req, res) => {
   const html = fs.readFileSync('src/index.html')
   res.write(html)
+  res.write(Navbar)
   const bungieMembershipId = sanitiseMembershipId(req.query.id)
   if( bungieMembershipId ) {
 
