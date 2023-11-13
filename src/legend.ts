@@ -83,3 +83,12 @@ export const metricCollections = {
     ]
 
 }
+
+export const seasonDefinitionLookup = (hash) => {
+    const seasonsDefinitions : Object = JSON.parse(fs.readFileSync('./resources/DestinySeasonDefinition.json').toString())
+    console.log(`Looking up season ${hash}`)
+
+    const output = seasonsDefinitions[hash]
+
+    return output
+}

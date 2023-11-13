@@ -6,6 +6,7 @@ dotenv.config()
 import https from 'https'
 import fs from 'fs'
 import playerProfile from './playerprofile.js'
+import playerRecords from './player-records.js'
 import characters from './characters.js';
 import metrics from './metrics.js';
 import Navbar from './navbar.js';
@@ -55,7 +56,10 @@ app.get('/', (req, res) => {
             res.write(`<div class='grid-container'>
               ${playerProfile( response )}
               ${characters ( response)}
+              
               ${metrics ( response )}
+
+              ${playerRecords ( response )}
             
             </div>`)
             wrapUp(res)
@@ -112,8 +116,8 @@ const getToken = async (authorizationCode: string) => {
   return tokenResponse.json() as Promise<TokenResponseData>;
 };
 
-app.get("/register", async (req, res) => {
-    const { code } = req.query
+app.get("/register", async (req, res) => { 
+    const code = req.query.code as string
     if (code !== "undefined") {
         console.log('Registration successful, Bungie.net code: ' + code)
         
