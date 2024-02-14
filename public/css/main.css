@@ -34,8 +34,7 @@ pre { background: var(--bg-darker); padding:0.5rem;
     tab-size:4; 
     overflow:scroll }
 
-.dimmed { opacity: 0.5; transition: opacity linear 100ms;}
-.dimmed:hover { opacity: 0.75 }
+.dimmed { opacity: 0.65; transition: opacity linear 100ms;}
 
 .button {
     border: 1px solid var(--bungie-blue);
@@ -50,6 +49,15 @@ pre { background: var(--bg-darker); padding:0.5rem;
 .button:hover {
     background-color: var(--bungie-blue);
     color: var(--text-dark);
+}
+
+input { 
+    color: var(--text-light);
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--bg-dark);
+    border: 1px solid var(--bungie-blue);
+
 }
 
 .text-bungie-blue {
@@ -176,7 +184,9 @@ img.platform-icon {
 }
 .character-title {
     background-color: rgba(68, 11, 73, 0.75);
-    font-weight: 600;
+    color: hsl(295, 49%, 70%);
+    font-weight: 500;
+    font-style: italic;
     padding:0.5rem;
 }
 

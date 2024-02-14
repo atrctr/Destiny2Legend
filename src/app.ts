@@ -10,6 +10,7 @@ import playerRecords from './player-records.js'
 import characters from './characters.js';
 import metrics from './metrics.js';
 import Navbar from './navbar.js';
+import Share from './share.js';
 
 const app = express()
 const port = 3000
@@ -43,6 +44,7 @@ app.get('/', (req, res) => {
   const html = fs.readFileSync('src/index.html')
   res.write(html)
   res.write(Navbar)
+  const fullUrl = req.protocol + '://' + req.hostname + req.originalUrl
   const bungieMembershipId = sanitiseMembershipId(req.query.id)
   if( bungieMembershipId ) {
 
@@ -54,6 +56,7 @@ app.get('/', (req, res) => {
         getDestinyProfile(membership.membershipType, membership.membershipId)
           .then((response) => {
             res.write(`<div class='grid-container'>
+              ${Share(fullUrl)}
               ${playerProfile( response )}
               ${characters ( response)}
               
