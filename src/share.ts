@@ -1,6 +1,6 @@
 export const Share = (shareUrl) => {
     const copyable = `
-    <div class='share-component dimmed'>
+    <div class='grid-tile grid-span-4 share-component dimmed'>
         <label>Permalink: </label>
         <input type='text' value='${shareUrl}' readonly='' />
     </div>`

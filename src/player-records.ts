@@ -5,8 +5,8 @@ export const playerRecords = ( apiResponse ) => {
     const seasonHashes = apiResponse.Response.profile.data.seasonHashes.toString().split(',')
     const titleList = '' 
 
-    let output = `<div class='grid-tile'>
-        <h2>Content<br/>ownership<br/>record</h2>
+    let output = `<div class='grid-tile grid-span-4 grid-start-col2'>
+        <h2>Content ownership record</h2>
         </div>`
 
     let contentOwnership = []
@@ -47,7 +47,7 @@ export const playerRecords = ( apiResponse ) => {
         contentPretty += `<li>${expansion}</li>\n`
     })
 
-    output += `<div class='grid-tile'>
+    output += `<div class='grid-tile grid-start-col2 grid-span-2 '>
             <h3>Expansions </h3>
             <ul>${contentPretty}</ul>
         </div>`
@@ -61,7 +61,7 @@ export const playerRecords = ( apiResponse ) => {
         seasonsPretty += `<li>${season.displayProperties.name} <span class='dimmed'>Season ${season.seasonNumber}</span></li>\n`
     });
 
-    output += `<div class='grid-tile'>
+    output += `<div class='grid-tile grid-span-2'>
         <h3>Seasons </h3>
         <ul>
         ${seasonsPretty}

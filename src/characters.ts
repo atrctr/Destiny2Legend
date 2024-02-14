@@ -21,16 +21,15 @@ export const characters = ( apiResponse ) => {
 
             const classMetrics = metricCollections.subclass[characterClass.toLowerCase()]
 
-            output += `<div class='grid-tile character-slot character-slot-${i} character-${characterClass.toLowerCase()}'>
+            output += `<div class='grid-tile grid-span-2 character-slot character-slot-${i} character-${characterClass.toLowerCase()}'>
                 <div id='character-${characterId}' class='character-emblem' style='background-color: ${emblemColor}; background-image: url(${emblemPath});'>
                     <h2 class='character-emblem-text'> ${characterClass}
                     <span class='character-emblem-lightlevel'><span class='destiny-symbols destiny-power-symbol'></span>${characterDetails.light}</span>
                     </h2>
+                    <span class='character-emblem-text dimmed'>${characterSpecies} ${characterGender}</span>
                 </div>
                 ${titleBanner(characterDetails.titleRecordHash)}
                 <ul class='character-statistics'>
-                    <li><span class="material-icons">person</span> 
-                    ${characterSpecies} ${characterGender}</li>
                     <li><span class="material-icons">hourglass_empty</span> 
                     Playtime: ${ playtimeCalculate(characterDetails.minutesPlayedTotal)} </li>
                     <li><span class="material-icons">history</span> 

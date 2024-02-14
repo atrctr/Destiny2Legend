@@ -41,6 +41,7 @@ export const metricCollections = {
             ],
     },
     weapons : [
+        // Primary
         2094013181, // AR
         982406257,  // pulse
         2599646044, // scout
@@ -48,10 +49,12 @@ export const metricCollections = {
         2012993124, // sidearm
         1165153680, // SMG
         3522276357, // bow
+        // Special
         139320435,  // shotgun
         105734892,  // fusion
         3124958797, // trace
         633604541,  // sniper
+        // Heavy
         1681554390, // GL
         1619269474, // sword
         401742412,  // HMG

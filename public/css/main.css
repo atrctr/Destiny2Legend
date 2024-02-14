@@ -90,22 +90,35 @@ img.icon {
 
 div.grid-container { 
     display: grid;
-    grid-template-columns: repeat(3, 400px);
+    grid-template-columns: repeat(6, 190px);
     grid-template-rows: auto;
-    column-gap: 1rem;
-    
+    column-gap: 20px;    
 }
+
 div.grid-tile {
-    min-height: 150px;
+    /* min-height: 150px; */
     margin-bottom: 1rem;
     /* background: linear-gradient(-30deg, rgba(69,69,69,0) 28%, rgba(124, 124, 124, 0.158) 79%); */
 }
 .grid-span-whole {
-    grid-column: span 3;
+    grid-column: span 6;
+}
+.grid-span-4 {
+    grid-column: 2 / span 4;
+    grid-column-start: 2;
+}
+.grid-start-col2 {
+    grid-column-start: 2;
+}
+.grid-span-2 {
+    grid-column-end: span 2;
 }
 .grid-placeholder {
     border: 2px solid rgba(255, 196, 0, 0.5);
     background-color: rgba(121, 121, 121, 0.1);
+}
+.grid-header {
+    margin-top:2rem;
 }
 
 #main-navbar {

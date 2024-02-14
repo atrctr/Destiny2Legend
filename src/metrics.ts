@@ -12,13 +12,13 @@ export const metrics = (apiResponse) => {
     Object.entries(metricsGroups).forEach(
         ([groupName,metrics]) => {
             output += `
-        <div class='grid-tile metrics-${groupName.toLowerCase()}'>
+        <div class='grid-tile grid-span-2 metrics-${groupName.toLowerCase()}'>
             <h3>${groupName}</h3>
             ${metricsBlock( metrics, apiResponse)}
         </div>`
         }
     )
-    output = `<h2 class='grid-span-whole'>Metrics</h2>
+    output = `<h2 class='grid-header grid-span-whole'>Metrics</h2>
         ${output}
         <div class='grid-span-whole metrics-weapons'>
             <h3>Weapon defeats</h3>
