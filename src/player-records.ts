@@ -12,31 +12,34 @@ export const playerRecords = ( apiResponse ) => {
     let contentOwnership = []
 
     if ((contentBitmask & contentEnum.Destiny2) === contentEnum.Destiny2) {
-        contentOwnership.push("Destiny 2 (Red War) <span class='dimmed'>2017</span>")
+        contentOwnership.push("Destiny 2 (Red War) <span class='dimmed'>Sep 2017</span>")
     }
     if ((contentBitmask & contentEnum.DLC1) === contentEnum.DLC1) {
-        contentOwnership.push("Curse of Osiris <span class='dimmed'>2017</span>")
+        contentOwnership.push("Curse of Osiris <span class='dimmed'>Dec 2017</span>")
     }
     if ((contentBitmask & contentEnum.DLC2) === contentEnum.DLC2) {
-        contentOwnership.push("Warmind <span class='dimmed'>2018</span>")
+        contentOwnership.push("Warmind <span class='dimmed'>May 2018</span>")
     }
     if ((contentBitmask & contentEnum.Forsaken) === contentEnum.Forsaken) {
-        contentOwnership.push("Forsaken <span class='dimmed'>2018</span>")
+        contentOwnership.push("Forsaken <span class='dimmed'>Sep 2018</span>")
     }
     if ((contentBitmask & contentEnum.YearTwoAnnualPass) === contentEnum.YearTwoAnnualPass) {
-        contentOwnership.push("Year 2 Annual Pass")
+        contentOwnership.push("Year 2 Annual Pass <span class='dimmed'>2019</span>")
     }
     if ((contentBitmask & contentEnum.Shadowkeep) === contentEnum.Shadowkeep) {
-        contentOwnership.push("Shadowkeep <span class='dimmed'>2019</span>")
+        contentOwnership.push("Shadowkeep <span class='dimmed'>Oct 2019</span>")
     }
     if ((contentBitmask & contentEnum.BeyondLight) === contentEnum.BeyondLight) {
-        contentOwnership.push("Beyond Light <span class='dimmed'>2020</span>")
+        contentOwnership.push("Beyond Light <span class='dimmed'>Nov 2020</span>")
     }
     if ((contentBitmask & contentEnum.TheWitchQueen) === contentEnum.TheWitchQueen) {
-        contentOwnership.push("The Witch Queen <span class='dimmed'>2022</span>")
+        contentOwnership.push("The Witch Queen <span class='dimmed'>Feb 2022</span>")
     }
     if ((contentBitmask & contentEnum.Lightfall) === contentEnum.Lightfall) {
-        contentOwnership.push("Lightfall <span class='dimmed'>2023</span>")
+        contentOwnership.push("Lightfall <span class='dimmed'>Feb 2023</span>")
+    }
+    if ((contentBitmask & contentEnum.Lightfall) === contentEnum.TheFinalShape) {
+        contentOwnership.push("The Final Shape <span class='dimmed'>Jun 2024</span>")
     }
     let contentPretty = ''
     
@@ -81,5 +84,6 @@ const enum contentEnum {
     BeyondLight = 64,
     Anniversary30th = 128,
     TheWitchQueen = 256,
-    Lightfall = 512
+    Lightfall = 512,
+    TheFinalShape = 1024
 }
