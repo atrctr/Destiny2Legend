@@ -72,6 +72,18 @@ hr {
     color: var(--text-dark);
 }
 
+.tooltip {
+    position: relative;
+}
+.tooltip:before {
+    content: attr(data-text);
+    position: absolute;
+    display: none;
+}
+.tooltip:hover:before {
+    display:block;
+}
+
 input { 
     color: var(--text-light);
     font-size: 1rem;

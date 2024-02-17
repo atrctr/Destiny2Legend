@@ -32,7 +32,7 @@ export const metrics = (apiResponse) => {
 
 export default metrics
 
-export const metricsBlock = ( requestedMetrics , apiResponse ) => {
+export const metricsBlock = ( requestedMetrics , apiResponse, format? ) => {
     const fetchedMetrics = apiResponse.Response.metrics.data.metrics
     console.log(requestedMetrics)
     let output = ""
@@ -48,7 +48,11 @@ export const metricsBlock = ( requestedMetrics , apiResponse ) => {
         } else {
             output += `<li class='metric'>`
         }
-        output += `${metricDefinition.name}: <span class='metric-value'>${metricValue}</span></li>\n`
+        output += `${metricDefinition.name}: <span class='metric-value'>${metricValue}</span>`
+        if ( format == 'tooltip-icon' ) {
+            output += ` <span class="tooltip" data-text="${metricDefinition.description}"><span class="material-icons">help_outline</span></span>`
+        }
+        output += `</li>\n`
     });
 
     output = `<ul class='metrics-list character-statistics'>

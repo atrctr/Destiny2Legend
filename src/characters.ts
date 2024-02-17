@@ -37,7 +37,7 @@ export const characters = ( apiResponse ) => {
 
                     <hr />
 
-                    ${metricsBlock(classMetrics,apiResponse)}
+                    ${metricsBlock(classMetrics,apiResponse,'tooltip-icon')}
                 </ul>
             </div>`
             
