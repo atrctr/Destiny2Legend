@@ -1,5 +1,29 @@
 import fs from 'fs'
 
+export function relativeDate ( datetime : Date ) {
+    const units = {
+        "year" : 24*60*365,
+        "month" : 24*60*30,
+        "week" : 24*60*7,
+        "day" : 24*60,
+        "hour" : 60,
+        "minute" : 1,
+    }
+    let dateDifference = Date.now() - datetime.getTime()
+    dateDifference = dateDifference/60000
+
+    let relativeDate = []
+    for ( let name in units ) {
+        var p =  Math.floor(dateDifference/units[name]);
+        if(p == 1) relativeDate.push(p + " " + name);
+        if(p >= 2) relativeDate.push(p + " " + name + "s");
+        dateDifference %= units[name]
+    }
+    relativeDate = relativeDate.slice(0,2)
+    const resultString = relativeDate.join(', ')
+    return resultString
+}
+
 export const titleLookup = ( hash, gender = 'Male' ) => {
     let recordsDefinitions : Object
     try {

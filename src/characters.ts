@@ -1,6 +1,6 @@
 import { BUNGIE_NET_URL } from "./app.js"
 import fs from 'fs'
-import { metricCollections, titleLookup } from "./legend.js"
+import { metricCollections, titleLookup, relativeDate } from "./legend.js"
 import { metricsBlock } from "./metrics.js"
 
 export const characters = ( apiResponse ) => {
@@ -14,10 +14,11 @@ export const characters = ( apiResponse ) => {
             const characterSpecies = raceTypes[characterDetails.raceType]
             const characterGender = genderTypes[characterDetails.genderType]
             const characterClass = classTypes[characterDetails.classType]
+            const dateLastPlayed = new Date(characterDetails.dateLastPlayed)
             const emblemPath = `${BUNGIE_NET_URL}/${characterDetails.emblemBackgroundPath}`
             const emblemColor = `rgba(${characterDetails.emblemColor.red}, ${characterDetails.emblemColor.green}, ${characterDetails.emblemColor.blue}, ${characterDetails.emblemColor.alpha})`
 
-            console.log( `${characterDetails.membershipId} Character slot ${i}: ${characterId} - ${characterClass}, ${characterSpecies} ${characterGender}`)
+            console.log( `${characterDetails.membershipId} Character ${i}: ${characterId} - ${characterClass} ${characterSpecies} ${characterGender}`)
 
             const classMetrics = metricCollections.subclass[characterClass.toLowerCase()]
 
@@ -33,7 +34,7 @@ export const characters = ( apiResponse ) => {
                     <li><span class="material-icons">hourglass_empty</span> 
                     Playtime: ${ playtimeCalculate(characterDetails.minutesPlayedTotal)} </li>
                     <li><span class="material-icons">history</span> 
-                    Last played: ${new Date(characterDetails.dateLastPlayed).toLocaleString()} </li>
+                    Last active ${ relativeDate(dateLastPlayed) } ago</li>
 
                     <hr />
 

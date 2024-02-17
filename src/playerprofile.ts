@@ -1,5 +1,6 @@
 import { DestinyGameVersions } from "bungie-api-ts/destiny2"
 import { BUNGIE_NET_URL } from "./app.js"
+import { relativeDate } from "./legend.js"
 
 export const playerProfile = ( apiResponse ) => {
     const profileData = apiResponse.Response.profile.data
@@ -7,13 +8,15 @@ export const playerProfile = ( apiResponse ) => {
     const bungieName = profileData.userInfo.bungieGlobalDisplayName + '<span class="text-bungie-blue">#' + profileData.userInfo.bungieGlobalDisplayNameCode + '</span>'
 
     const responseTimestamp = new Date(apiResponse.Response.responseMintedTimestamp).toLocaleString()
-    const lastActiveDate = new Date(profileData.dateLastPlayed).toLocaleString()
+    const lastActiveDate = relativeDate(new Date(profileData.dateLastPlayed))
 
     const triumphScoreActive = apiResponse.Response.metrics.data.metrics['3981543480'].objectiveProgress.progress
     const triumphScoreTotal = apiResponse.Response.metrics.data.metrics['3329916678'].objectiveProgress.progress
 
     let output = `
-            <div class='grid-span-3 grid-start-col2'><h1 class='player-bungiename'>${bungieName}</h1></div>
+            <div class='grid-span-3 grid-start-col2'><h1 class='player-bungiename'>${bungieName}</h1>
+            <p class='dimmed'>Last active ${lastActiveDate} ago</p>
+            </div>
  
             <div class='grid-tile text-lg'>
                 <p>${platformIcons(profileData.userInfo.applicableMembershipTypes)}</p>
