@@ -5,7 +5,9 @@ export const metrics = (apiResponse) => {
     const metricsGroups = {
         "Crucible" : metricCollections.pvp,
         "Gambit" : metricCollections.gambit,
-        "Vanguard" : metricCollections.strikes
+        "Vanguard" : metricCollections.strikes,
+        "Raids" : metricCollections.raids,
+        "Dungeons" : metricCollections.dungeons,
     }
     let output = ''
 
@@ -20,13 +22,19 @@ export const metrics = (apiResponse) => {
     )
     output = `<h2 class='grid-header grid-span-whole'>Metrics</h2>
         ${output}
-        <div class='grid-span-whole metrics-weapons'>
-            <h3>Weapon defeats</h3>
-            <div class='text-columns-3'>
-                ${metricsBlock(metricCollections.weapons, apiResponse)}
-            </div>
-        </div>`
-
+        <div class='grid-span-4 grid-start-col2 metrics-weapons'>
+            <h2>Weapon defeats</h2>
+        </div>
+        
+        <div class='grid-tile grid-span-2 grid-start-col2 metrics-weapons'>
+            <h3>Primary</h3>
+            ${metricsBlock( metricCollections.weapons.primary, apiResponse)}
+        </div>
+        <div class='grid-tile grid-span-2 metrics-weapons'>
+            <h3>Special & Heavy</h3>
+            ${metricsBlock( metricCollections.weapons.special, apiResponse)}
+            ${metricsBlock( metricCollections.weapons.heavy, apiResponse)}
+        </div>`      
     return output
 }
 
