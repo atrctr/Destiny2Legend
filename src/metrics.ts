@@ -42,31 +42,33 @@ export default metrics
 
 export const metricsBlock = ( requestedMetrics , apiResponse, format? ) => {
     const fetchedMetrics = apiResponse.Response.metrics.data.metrics
-    console.log(requestedMetrics)
     let output = ""
 
     requestedMetrics.forEach( metric => {
-        const metricDefinition = metricDefinitionLookup(metric)
-        const metricValue = fetchedMetrics[metric].objectiveProgress.progress
-        const metricComplete = fetchedMetrics[metric].objectiveProgress.complete
-
-        console.log(`${metricDefinition.name}: ${metricValue} ${metricComplete}`)
-        if ( metricComplete == true ) { 
-            output += `<li class='metric metric-complete'>`
-        } else {
-            output += `<li class='metric'>`
+        try {
+            const metricDefinition = metricDefinitionLookup(metric)
+            const metricValue = fetchedMetrics[metric].objectiveProgress.progress
+            const metricComplete = fetchedMetrics[metric].objectiveProgress.complete
+            if ( metricComplete == true ) { 
+                output += `<li class='metric metric-complete'>`
+            } else {
+                output += `<li class='metric'>`
+            }
+            output += `${metricDefinition.name}: <span class='metric-value'>${metricValue}</span>`
+            if ( format == 'tooltip-icon' ) {
+                output += ` <span class="tooltip" data-text="${metricDefinition.description}"><span class="material-icons">help_outline</span></span>`
+            }
+            output += `</li>\n`
+        
+        } catch (e) {
+            console.log (`Failed while fetching Metrics: ${metric}: \n${e}`)
         }
-        output += `${metricDefinition.name}: <span class='metric-value'>${metricValue}</span>`
-        if ( format == 'tooltip-icon' ) {
-            output += ` <span class="tooltip" data-text="${metricDefinition.description}"><span class="material-icons">help_outline</span></span>`
-        }
-        output += `</li>\n`
     });
 
-    output = `<ul class='metrics-list character-statistics'>
-    ${output}
-    </ul>`
-    return output
+        output = `<ul class='metrics-list character-statistics'>
+        ${output}
+        </ul>`
+        return output
 }
 
 export const metricPretty = ( value, label, icon ) =>

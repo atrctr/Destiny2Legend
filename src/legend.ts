@@ -1,19 +1,34 @@
 import fs from 'fs'
 
-export const titleLookup = ( hash, gender ) => {
-    const recordsDefinitions : Object = JSON.parse(fs.readFileSync('./resources/DestinyRecordDefinition.json').toString())
-    console.log(`Looking up title ${hash}`)
-    const titleMatch = recordsDefinitions[hash].titleInfo.titlesByGender[gender]
-    return titleMatch
+export const titleLookup = ( hash, gender = 'Male' ) => {
+    let recordsDefinitions : Object
+    try {
+        recordsDefinitions = JSON.parse(fs.readFileSync('./resources/DestinyRecordDefinition.json').toString())
+
+        try {
+            const titleMatch = recordsDefinitions[hash].titleInfo.titlesByGender[gender]
+            return titleMatch
+        } catch (error) {
+            console.log(`Failed to match up title hash ${hash} to definition:`, error)
+        }
+    } catch (error) {
+        console.log('Unable to fetch title definitions: ', error)
+    }
 }
 
 export const metricDefinitionLookup = ( hash ) => {
-    const metricsDefinitions : Object = JSON.parse(fs.readFileSync('./resources/DestinyMetricDefinition.json').toString())
-    console.log(`Looking up metrics ${hash}`)
-
-    const metricMatch = metricsDefinitions[hash].displayProperties
-
-    return metricMatch
+    try {
+        const metricsDefinitions : Object = JSON.parse(fs.readFileSync('./resources/DestinyMetricDefinition.json').toString())
+        try {
+            const metricMatch = metricsDefinitions[hash].displayProperties
+            return metricMatch
+        }
+        catch (e) {
+            console.log(`Failed to return metric definition for ${hash}: `, e)
+        }
+    } catch (error) {
+        console.log('Unable to fetch metrics definitions: ', error)
+    }
 }
 
 export const metricCollections = {

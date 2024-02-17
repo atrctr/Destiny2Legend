@@ -28,7 +28,6 @@ export const bungieAuthedFetch = (accessToken?: string) => async (
           : ""
       }`;
       console.log(`Fetching: ${url}`);
-      console.log(`API key: ${BUNGIE_API_KEY}` )
       const response = await fetch(url, { headers, credentials: "include" });
       console.log(response.status + ' ' + response.statusText);
       return await response.json();
@@ -55,14 +54,17 @@ export const getDestinyProfile = async (
   membershipType: number,
   destinyMembershipId: string
 ) => {
-  let response = await getProfile(bungieAuthedFetch(), {
-    membershipType: membershipType,
-    destinyMembershipId: destinyMembershipId,
-    components: [DestinyComponentType.Characters, DestinyComponentType.Profiles, DestinyComponentType.Metrics, DestinyComponentType.Records, DestinyComponentType.ProfileProgression]
-  })
-  console.log('Bungie.net response status: ' + response.ErrorStatus)
+  try {
+    let response = await getProfile(bungieAuthedFetch(), {
+      membershipType: membershipType,
+      destinyMembershipId: destinyMembershipId,
+      components: [DestinyComponentType.Characters, DestinyComponentType.Profiles, DestinyComponentType.Metrics, DestinyComponentType.Records, DestinyComponentType.ProfileProgression]
+    })
+    return response
+  } catch (e) {
+    console.log('Destiny 2 profile fetching failed. Error: ', e)
+  }
 
-  return response
 };
 
 export const destinyPrimaryMembershipLookup = async ( 
@@ -72,7 +74,6 @@ export const destinyPrimaryMembershipLookup = async (
     membershipId: destinyMembershipId,
     membershipType: -1
   })
-  console.log(`PrimaryMembershipLookup | Bungie.net response status: ${response.ErrorCode} ${response.ErrorStatus} `)
   if( response.ErrorCode == 1) {
     let primaryMembership = {membershipId: "", membershipType : 0, iconPath : ""}
     if ( response.Response.primaryMembershipId != undefined ) {
@@ -80,14 +81,13 @@ export const destinyPrimaryMembershipLookup = async (
     } else {
       primaryMembership.membershipId = destinyMembershipId
     }
-    console.log('Bungie.net user ID: ' + response.Response.bungieNetUser.membershipId + '\nPrimary membership: ' + primaryMembership.membershipId)
+    // console.log('Bungie.net user ID: ' + response.Response.bungieNetUser.membershipId + '\nPrimary membership: ' + primaryMembership.membershipId)
     primaryMembership.membershipType = response.Response.destinyMemberships.filter(membership => membership.membershipId === primaryMembership.membershipId)[0].membershipType
     primaryMembership.iconPath = response.Response.destinyMemberships.filter(membership => membership.membershipId === primaryMembership.membershipId)[0].iconPath
-    //console.log(primaryMembership)
-    console.log('Membership type: ' + primaryMembership.membershipType )
+    // console.log('Membership type: ' + primaryMembership.membershipType )
 
     return primaryMembership
   } else {
-    console.log('PrimaryMembershipLookup failed.')
+    console.log(`Primary Membership lookup failed. Error: ${response.ErrorCode}`)
   }
 }

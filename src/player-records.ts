@@ -3,7 +3,6 @@ import { seasonDefinitionLookup } from "./legend.js"
 export const playerRecords = ( apiResponse ) => {
     const contentBitmask = apiResponse.Response.profile.data.versionsOwned
     const seasonHashes = apiResponse.Response.profile.data.seasonHashes.toString().split(',')
-    const titleList = '' 
 
     let output = `<div class='grid-tile grid-span-4 grid-start-col2'>
         <h2>Content ownership record</h2>
@@ -54,11 +53,13 @@ export const playerRecords = ( apiResponse ) => {
 
     let seasonsPretty = ''
 
-    console.log( seasonHashes)
-
     seasonHashes.forEach( seasonHash => {
-        const season = seasonDefinitionLookup ( seasonHash )
-        seasonsPretty += `<li> ${seasonShortName(season.displayProperties.name)} <span class='dimmed'>(s${season.seasonNumber})</span></li>\n`
+        try {
+            const season = seasonDefinitionLookup ( seasonHash )
+            seasonsPretty += `<li> ${seasonShortName(season.displayProperties.name)} <span class='dimmed'>(s${season.seasonNumber})</span></li>\n`
+        } catch (e) {
+            console.log (`Failed to look up Season definitions: ${e}`)
+        }
     });
 
     output += `<div class='grid-tile grid-span-2'>
@@ -69,7 +70,6 @@ export const playerRecords = ( apiResponse ) => {
     </div>`       
 
     return output
-
 }
 
 export default playerRecords
