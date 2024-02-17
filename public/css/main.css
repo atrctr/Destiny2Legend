@@ -1,13 +1,22 @@
 :root {
     --bg-dark: #14141a;
     --bg-darker: rgba(0,0,0,0.5);
-    --bg-light: #eee;
+    --bg-light: #eeeeee;
+    --bg-lighter: rgba(255, 255, 255, 0.5);
     --text-light: var(--bg-light);
     --text-dark:var(--bg-dark);
-    --accent-color: var(--bungie-blue);
+    --accent-color: var(--color-bungie-blue);
     --secondary-color: var(--gold);
-    --bungie-blue: rgb(71, 156, 228);
-    --gold: rgb(255, 218, 136);
+    --color-bungie-blue: rgb(71, 156, 228);
+    --color-gold: rgb(255, 218, 136);
+    --color-solar: rgb(241, 111, 39); 
+    --color-arc: rgb(122, 236, 243);
+    --color-void: rgb(178, 131, 204);
+    --color-stasis: rgb(77, 135, 255);
+    --color-strand: rgb(53, 227, 102) ;
+    --color-crucible : rgb(168, 0, 0);
+    --color-gambit : rgb(26, 97, 61);
+    --color-vanguard : rgb(29, 73, 109);
 }
 
 body {
@@ -18,7 +27,7 @@ body {
     padding: 0; margin: 0;
 }
 
-h1 { font-size:3rem; }
+h1 { font-size:3rem; margin:0; }
 h2 { margin: 0;
     font-weight: 400;
     font-size:2rem;
@@ -34,10 +43,22 @@ pre { background: var(--bg-darker); padding:0.5rem;
     tab-size:4; 
     overflow:scroll }
 
+p { padding: 0.2rem auto; margin: 0.2rem auto}
+
+hr { 
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--bg-lighter), rgba(0,0,0,0));
+}
+
+.text-sm {font-size:0.8em}
+.text-lg {font-size:1.8em}
+.text-xl {font-size:3em}
+
 .dimmed { opacity: 0.65; transition: opacity linear 100ms;}
 
 .button {
-    border: 1px solid var(--bungie-blue);
+    border: 1px solid var(--color-bungie-blue);
     background-color: rgba(121, 121, 121, 0.1);
     padding: 0.5rem;
     display:block;
@@ -47,7 +68,7 @@ pre { background: var(--bg-darker); padding:0.5rem;
     transition: all linear 100ms;
 }
 .button:hover {
-    background-color: var(--bungie-blue);
+    background-color: var(--color-bungie-blue);
     color: var(--text-dark);
 }
 
@@ -56,15 +77,15 @@ input {
     font-size: 1rem;
     font-family: inherit;
     background: var(--bg-dark);
-    border: 1px solid var(--bungie-blue);
+    border: 1px solid var(--color-bungie-blue);
 
 }
 
 .text-bungie-blue {
-    color: var(--bungie-blue);
+    color: var(--color-bungie-blue);
 }
 .text-gold {
-    color: var(--gold);
+    color: var(--color-gold);
 }
 
 img.icon {
@@ -73,7 +94,7 @@ img.icon {
     width: 1.5em;
 }
 .material-icons {
-    font-size:24px;
+    font-size:1.5em;
     vertical-align: middle;
 }
 .destiny-symbols {
@@ -90,9 +111,10 @@ img.icon {
 
 div.grid-container { 
     display: grid;
-    grid-template-columns: repeat(6, 190px);
+    grid-template-columns: repeat(6, 195px);
     grid-template-rows: auto;
-    column-gap: 20px;    
+    column-gap: 10px;
+    row-gap: 20px; 
 }
 
 div.grid-tile {
@@ -107,11 +129,14 @@ div.grid-tile {
     grid-column: 2 / span 4;
     grid-column-start: 2;
 }
-.grid-start-col2 {
-    grid-column-start: 2;
+.grid-span-3 {
+    grid-column-end: span 3;
 }
 .grid-span-2 {
     grid-column-end: span 2;
+}
+.grid-start-col2 {
+    grid-column-start: 2;
 }
 .grid-placeholder {
     border: 2px solid rgba(255, 196, 0, 0.5);
@@ -148,22 +173,13 @@ img.platform-icon {
     margin:2rem auto 1rem;
 }
 
-.player-bungiename {
-    margin:1rem 0 0;
-    word-wrap: break-word;
-}
-
-.guardian-rank {
-    float:right;
-    text-transform: uppercase;
-    font-weight: 600;
-}
 .guardian-rank-roundel {
     color:var(--text-dark);
     background-color: var(--bg-light);
     border-radius: 50%;
-    width: 1.2em;
-    height: 1.2em;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
     display: inline-block;
     text-align: center;
     font-weight: 600;
@@ -192,12 +208,15 @@ img.platform-icon {
 }
 .character-emblem-lightlevel {
     float:right;
-    color: var(--secondary-color);
+    color: var(--color-gold);
     margin: 0; padding-right:0.25rem;
 }
 .character-title {
     background-color: rgba(68, 11, 73, 0.75);
-    color: hsl(295, 49%, 70%);
+    color: rgb(210, 141, 216);
+    margin: 2px 0;
+    border-top: 1px solid rgb(210, 141, 216);
+    border-bottom: 1px solid rgb(210, 141, 216);
     font-weight: 500;
     font-style: italic;
     padding:0.5rem;
@@ -223,5 +242,5 @@ ul.character-statistics {
 }
 
 .metric-complete .metric-value {
-    color: var(--gold);
+    color: var(--color-gold);
 }
