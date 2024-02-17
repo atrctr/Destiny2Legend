@@ -58,7 +58,7 @@ export const playerRecords = ( apiResponse ) => {
 
     seasonHashes.forEach( seasonHash => {
         const season = seasonDefinitionLookup ( seasonHash )
-        seasonsPretty += `<li>${season.displayProperties.name} <span class='dimmed'>Season ${season.seasonNumber}</span></li>\n`
+        seasonsPretty += `<li> ${seasonShortName(season.displayProperties.name)} <span class='dimmed'>(s${season.seasonNumber})</span></li>\n`
     });
 
     output += `<div class='grid-tile grid-span-2'>
@@ -86,4 +86,10 @@ const enum contentEnum {
     TheWitchQueen = 256,
     Lightfall = 512,
     TheFinalShape = 1024
+}
+
+const seasonShortName = ( seasonLongName : string ) => {
+    const regex = /(season of (the )?)/gi
+    const shortName = seasonLongName.replace(regex,'')
+    return shortName
 }
