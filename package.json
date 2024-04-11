@@ -6,7 +6,7 @@
   "dependencies": {
     "bungie-api-ts": "^4.22.2",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
