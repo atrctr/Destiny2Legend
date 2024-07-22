@@ -54,7 +54,7 @@ export const metricsBlock = ( requestedMetrics , apiResponse, format? ) => {
             } else {
                 output += `<li class='metric'>`
             }
-            output += `${metricDefinition.name}: <span class='metric-value'>${metricValue}</span>`
+            output += `${metricDefinition.name}: <span class='metric-value'>${metricValue.toLocaleString()}</span>`
             if ( format == 'tooltip-icon' ) {
                 output += ` <span class="tooltip" data-text="${metricDefinition.description}"><span class="material-icons">help_outline</span></span>`
             }

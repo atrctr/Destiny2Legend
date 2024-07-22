@@ -11,6 +11,7 @@ import characters from './characters.js';
 import metrics from './metrics.js';
 import Navbar from './navbar.js';
 import Share from './share.js';
+import titleComponent from './titles.js';
 
 const app = express()
 const port = 3000
@@ -36,7 +37,11 @@ app.use((req, res, next) => {
 app.use(express.static(path.join('./public')))
 
 function wrapUp(res) {
-  res.write('</div></body></html>')
+  res.write(`</div>
+  <footer><a href="https://github.com/atrctr/Destiny2Legend">
+    <span class="material-icons">code</span> Github</a>
+  </footer>
+  </body></html>`)
   res.send()
 }
 
@@ -59,6 +64,8 @@ app.get('/', (req, res) => {
               ${Share(fullUrl)}
               ${playerProfile( response )}
               ${characters ( response)}
+              
+              ${titleComponent ( response)}
               
               ${metrics ( response )}
 
@@ -110,10 +117,9 @@ const getToken = async (authorizationCode: string) => {
     redirect: "follow",
     // referrer: "no-referrer"
   });
-  console.log(tokenResponse)
   if (tokenResponse.status !== 200) {
     throw Error(
-      `Status code ${tokenResponse.status} from bungie token exchange`
+      `Status code ${tokenResponse.status} from Bungie token exchange`
     );
   }
   return tokenResponse.json() as Promise<TokenResponseData>;
@@ -122,7 +128,6 @@ const getToken = async (authorizationCode: string) => {
 app.get("/register", async (req, res) => { 
     const code = req.query.code as string
     if (code !== "undefined") {
-        console.log('Registration successful, Bungie.net code: ' + code)
         
         try {
           const tokenData = await getToken(code);

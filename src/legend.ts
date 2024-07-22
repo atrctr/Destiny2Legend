@@ -7,7 +7,7 @@ export function relativeDate ( datetime : Date ) {
         "week" : 24*60*7,
         "day" : 24*60,
         "hour" : 60,
-        "minute" : 1,
+        //"minute" : 1,
     }
     let dateDifference = Date.now() - datetime.getTime()
     dateDifference = dateDifference/60000
